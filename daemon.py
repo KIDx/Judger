@@ -41,7 +41,6 @@ class Daemon:
 	def start(self):
 		'''
 		'''
-		print daemondir
 		os.chdir(daemondir + "/judge");
 		#os.umask(0)
 
@@ -65,9 +64,7 @@ class Daemon:
 def makefile(indir,lang,val):
 	try:
 		sfile = indir + "/" + langf[lang]
-		print sfile
 		fd = codecs.open(sfile,"wb",'utf-8')
-		print sfile
 		fd.write(val)
 		fd.close()
 		return True
@@ -119,7 +116,6 @@ class judge:
 			self.time = int(self.time)
 		except :
 			exit(1)
-#		print (self.result,self.mem,self.timek
 
 OJ_WAIT = 0
 OJ_RUN = 1
@@ -135,7 +131,6 @@ OJ_CE = 8
 class JudgeDaemon(Daemon):
 	def run(self):
 		cfg = ConfigParser.ConfigParser()
-		print daemondir
 		cfg.readfp(open(daemondir+cfgfile))
 		host = cfg.get('daemon','Host')
 		dbname = cfg.get('daemon','DataBase')
@@ -153,10 +148,7 @@ class JudgeDaemon(Daemon):
 				one_solution = solutions.find_and_modify({'result':OJ_WAIT}, {"$set":{"result":OJ_RUN}})
 				if one_solution != None:
 					user = users.find_one({'name':one_solution['userName']})
-					#print one_solution["language"],one_solution["code"]
 					if makefile(tmdir,int(one_solution["language"]),one_solution["code"]):
-						#print one_solution["language"],one_solution["code"]
-						print dadir + "/" + str(one_solution['problemID'])
 						one_problem = problems.find_one({'problemID':int(one_solution['problemID'])})
 						if int(one_problem['spj']) == 1 and int(one_problem['TC']) == 1:
 							gzhujudge = judge(one_solution["language"],datadir = dadir +"/" + str(one_solution['problemID']),tmpdir=tmdir,spj=True,tc=True);

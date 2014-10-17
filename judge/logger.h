@@ -84,7 +84,7 @@ int log_open(const char *filename)
     {
         printf("14 0 -38\n");
         fprintf(stderr, "log_file: %s", log_filename);
-        perror("Can't not open log file");
+        perror("Can not open log file");
         exit(1);
     }
     log_opened = 1;
@@ -147,7 +147,9 @@ int log_write(int level, const char *file, const int line, const char *fmt, ...)
     {
         perror("lock error");
         exit(1);
-    }else{
+    }
+    else
+    {
         if(write(log_fd, buffer, count) < 0)
         {
             perror("write error");

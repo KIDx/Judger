@@ -62,34 +62,6 @@ const LangSupport JavaLang = {
     { "java", "-Xms128M", "-Xms512M", "-DONLINE_JUDGE=true", "Main", NULL },
     2, 2, true
 };
-
-const LangSupport CC11Lang = {
-    "c++11", "Main.cpp", "tc11.cpp", "tc11.hpp",
-#ifdef JUDGE_DEBUG
-    {"g++","Main.cpp","-o",
-    "Main", "-std=c++11","-O2",NULL},
-#else
-    { "g++", "Main.cpp", "-o", "Main", "-std=c++11",
-    "-Wall", "-lm", "--static", "-DONLINE_JUDGE", NULL },
-#endif
-    {"./Main", NULL},
-    1, 1, false
-};
-
-const LangSupport CSLang = {
-    "C#", "Main.cs", "tc.cs", "tch.cs",
-    {"gmcs", "-define:ONLINE_JUDGE", "-warn:0", "Main.cs", NULL},
-    {"mono", "Main.exe", NULL},
-    2, 2, false
-};
-
-const LangSupport VBLang = {
-    "VB.Net", "Main.vb", "tc.vb", "tch.vb",
-    {"vbnc", "-define:ONLINE_JUDGE", "-nowarn", "Main.vb", NULL},
-    {"mono", "Main.exe", NULL},
-    2, 2, false
-};
-
 }; //End of namespace
 
 LanguageSupport::LangSupport const *Langs[] =
@@ -97,10 +69,7 @@ LanguageSupport::LangSupport const *Langs[] =
     &LanguageSupport::UnknownLang,
     &LanguageSupport::CLang,
     &LanguageSupport::CppLang,
-    &LanguageSupport::JavaLang,
-    &LanguageSupport::CC11Lang,
-    &LanguageSupport::CSLang,
-    &LanguageSupport::VBLang
+    &LanguageSupport::JavaLang
 };
 
 namespace judge_conf
@@ -110,9 +79,6 @@ namespace judge_conf
     const int LANG_C        = 1;
     const int LANG_CPP      = 2;
     const int LANG_JAVA     = 3;
-    const int LANG_CC11     = 4;
-    const int LANG_CS       = 5;
-    const int LANG_VB       = 6;
 };
 
 #endif
