@@ -732,7 +732,7 @@ int main(int argc, char *argv[])
 
                     if (Langs[problem::lang]->VMrunning)
                     {
-                            tempmemory = rused.ru_minflt *(getpagesize()/judge_conf::KILO);
+                        tempmemory = rused.ru_minflt *(getpagesize()/judge_conf::KILO);
                     }
                     else
                     {
