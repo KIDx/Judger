@@ -397,7 +397,7 @@ void set_limit()
         }
     }
 
-    //log_close();
+    log_close();
 
     //输出文件限制
     lim.rlim_max = problem::output_limit * judge_conf::KILO;
