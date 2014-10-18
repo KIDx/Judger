@@ -739,7 +739,7 @@ int main(int argc, char *argv[])
                         tempmemory = getmemory(userexe);
                     }
                     problem::memory_usage = Max(problem::memory_usage, tempmemory);
-                    if (problem::memory_usage > problem::memory_limit * Langs[problem::lang]->MemFactor)
+                    if (problem::memory_usage > problem::memory_limit)
                     {
                         problem::result = judge_conf::OJ_MLE;
                         ptrace(PTRACE_KILL, userexe);
@@ -786,22 +786,23 @@ int main(int argc, char *argv[])
                 problem::time_usage = time_tmp;
             }
 
-            if (problem::time_usage > problem::time_limit * Langs[problem::lang]->TimeFactor)
+            if (problem::time_usage > problem::time_limit)
+            {
+                problem::time_usage = problem::time_limit;
                 problem::result = judge_conf::OJ_TLE;
-            if (problem::memory_usage > problem::memory_limit * Langs[problem::lang]->MemFactor)
+            }
+
+            if (problem::memory_usage > problem::memory_limit)
+            {
+                problem::memory_usage = problem::memory_limit;
                 problem::result = judge_conf::OJ_MLE;
+            }
+
             if (problem::result != judge_conf::OJ_AC && problem::result != judge_conf::OJ_PE)
             {
-                if (problem::result == judge_conf::OJ_TLE)
-                {
-                    problem::time_usage = problem::time_limit * Langs[problem::lang]->TimeFactor;
-                }
-                else if (problem::result == judge_conf::OJ_MLE)
-                {
-                    problem::memory_usage = problem::memory_limit * Langs[problem::lang]->MemFactor;
-                }
                 break;
             }
+
         }//if (isInfile())
 
     }//end while, next input file
