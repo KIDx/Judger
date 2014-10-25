@@ -704,6 +704,7 @@ int main(int argc, char *argv[])
                             case SIGKILL:
                                 //LOG_BUG("KILL");
                                 problem::result = judge_conf::OJ_TLE;
+                                problem::time_usage = problem::time_limit;
                                 break;
                             //OLE
                             case SIGXFSZ:
