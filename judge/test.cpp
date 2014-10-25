@@ -358,7 +358,8 @@ void set_limit()
 {
     rlimit lim;
     //时间限制
-    lim.rlim_cur = (problem::time_limit - problem::time_usage + 999)/1000 + 1;
+    lim.rlim_cur = (problem::time_limit + 999)/1000 + 1;
+    LOG_DEBUG("rlim_cur(%d).", lim.rlim_cur);
     lim.rlim_max = lim.rlim_cur * 10;
     if (setrlimit(RLIMIT_CPU, &lim) < 0)
     {
@@ -599,8 +600,7 @@ int main(int argc, char *argv[])
                 }
 
 
-                int user_time_limit = problem::time_limit - problem::time_usage
-                    + judge_conf::time_limit_addtion;
+                int user_time_limit = problem::time_limit + judge_conf::time_limit_addtion;
 
                 //设置用户程序的运行实际时间，防止意外情况卡住
                 if (EXIT_SUCCESS != malarm(ITIMER_REAL, user_time_limit))
@@ -779,6 +779,8 @@ int main(int argc, char *argv[])
             }//else     userexe end
 
             if (problem::result == judge_conf::OJ_RF) break;
+
+            LOG_DEBUG("time_usage(%d).", problem::time_usage);
 
             int time_tmp = rused.ru_utime.tv_sec*1000 + rused.ru_utime.tv_usec/1000
               + rused.ru_stime.tv_sec*1000 + rused.ru_stime.tv_usec/1000;
