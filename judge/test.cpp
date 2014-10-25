@@ -359,7 +359,7 @@ void set_limit()
     rlimit lim;
     //时间限制
     lim.rlim_cur = (problem::time_limit + 999)/1000 + 1;
-    LOG_DEBUG("rlim_cur(%d).", lim.rlim_cur);
+    //LOG_DEBUG("rlim_cur(%d).", lim.rlim_cur);
     lim.rlim_max = lim.rlim_cur * 10;
     if (setrlimit(RLIMIT_CPU, &lim) < 0)
     {
@@ -780,14 +780,14 @@ int main(int argc, char *argv[])
 
             if (problem::result == judge_conf::OJ_RF) break;
 
-            LOG_DEBUG("time_usage(%d).", problem::time_usage);
-
             int time_tmp = rused.ru_utime.tv_sec*1000 + rused.ru_utime.tv_usec/1000
               + rused.ru_stime.tv_sec*1000 + rused.ru_stime.tv_usec/1000;
             if (problem::time_usage < time_tmp)
             {
                 problem::time_usage = time_tmp;
             }
+
+            //LOG_DEBUG("time_usage(%d).", problem::time_usage);
 
             if (problem::time_usage > problem::time_limit)
             {
