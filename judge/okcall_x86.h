@@ -36,7 +36,7 @@ SysCallLimit CLimit[] = {
     Allow (SYS_mmap2) Calls (INF),
     Allow (SYS_mprotect) Calls (16),
     Allow (SYS_munmap) Calls (INF),
-    Allow (SYS_open) Calls (0),
+    Allow (SYS_open) Calls (1),
     Allow (SYS_read) Calls (INF),
     Allow (SYS_readlink) Calls (1),
     Allow (SYS_rt_sigprocmask) Calls (1),
