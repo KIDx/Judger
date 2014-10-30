@@ -59,7 +59,7 @@ const LangSupport JavaLang = {
 #else
     { "javac", "-J-Xms128M", "-J-Xmx512M", "Main.java", NULL },
 #endif
-    { "java", "-Xms128M", "-Xms512M", "-DONLINE_JUDGE=true", "Main", NULL },
+    { "java", "-Djava.security.manager", "-Xms128M", "-Xms512M", "-DONLINE_JUDGE=true", "Main", NULL },
     2, 2, true
 };
 }; //End of namespace
